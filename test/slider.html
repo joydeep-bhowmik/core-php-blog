@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <div class="slider">
+            <div class="slider-container">
+                <div class="slide">
+                    <div class="content">Slide 1</div>
+                </div>
+                <div class="slide">
+                    <div class="content">Slide 2</div>
+                </div>
+                <div class="slide">
+                    <div class="content">Slide 3</div>
+                </div>
+            </div>
+
+            <div class="prev-button">&lt;</div>
+            <div class="next-button">&gt;</div>
+        </div>
+
+
+        <style>
+            .slider {
+                position: relative;
+                width: 100%;
+                height: 300px;
+                overflow: hidden;
+            }
+
+            .slider-container {
+                display: flex;
+                transition: transform 0.3s ease-in-out;
+            }
+
+            .slide {
+                width: 100%;
+                height: 100%;
+                flex-shrink: 0;
+            }
+
+            .content {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 24px;
+            }
+
+            .prev-button,
+            .next-button {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 50px;
+                height: 50px;
+                background-color: rgba(0, 0, 0, 0.5);
+                color: #fff;
+                font-size: 24px;
+                line-height: 50px;
+                text-align: center;
+                cursor: pointer;
+            }
+
+            .prev-button {
+                left: 10px;
+            }
+
+            .next-button {
+                right: 10px;
+            }
+
+        </style>
+        <script>
+var sliderContainer = document.querySelector(".slider-container");
+var prevButton = document.querySelector(".prev-button");
+var nextButton = document.querySelector(".next-button");
+
+var slidePosition = 0;
+var slideWidth = sliderContainer.offsetWidth;
+var totalSlides = sliderContainer.childElementCount;
+var touchStartX = 0;
+var touchEndX = 0;
+
+// Previous button click event
+prevButton.addEventListener("click", function () {
+  slidePosition += slideWidth;
+  if (slidePosition > 0) {
+    slidePosition = -(slideWidth * (totalSlides - 1));
+  }
+  sliderContainer.style.transform = "translateX(" + slidePosition + "px)";
+});
+
+// Next button click event
+nextButton.addEventListener("click", function () {
+  slidePosition -= slideWidth;
+  if (slidePosition < -(slideWidth * (totalSlides - 1))) {
+    slidePosition = 0;
+  }
+  sliderContainer.style.transform = "translateX(" + slidePosition + "px)";
+});
+
+// Touch start event
+sliderContainer.addEventListener("touchstart", function (event) {
+  touchStartX = event.touches[0].clientX;
+});
+
+// Touch move event
+sliderContainer.addEventListener("touchmove", function (event) {
+  var touchMoveX = event.touches[0].clientX;
+  var touchDiff = touchStartX - touchMoveX;
+  sliderContainer.style.transform = "translateX(" + (slidePosition - touchDiff) + "px)";
+});
+
+// Touch end event
+sliderContainer.addEventListener("touchend", function (event) {
+  touchEndX = event.changedTouches[0].clientX;
+  var touchDiff = touchStartX - touchEndX;
+  if (touchDiff > 50) {
+    // Swipe left
+    slidePosition += slideWidth;
+    if (slidePosition > 0) {
+      slidePosition = -(slideWidth * (totalSlides - 1));
+    }
+  } else if (touchDiff < -50) {
+    // Swipe right
+    slidePosition -= slideWidth;
+    if (slidePosition < -(slideWidth * (totalSlides - 1))) {
+      slidePosition = 0;
+    }
+  }
+  sliderContainer.style.transform = "translateX(" + slidePosition + "px)";
+});
+
+
+        </script>
+    </div>
+
+</body>
+</html>
