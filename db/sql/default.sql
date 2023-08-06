@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 4.9.7
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Apr 13, 2023 at 11:15 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.0.28
+-- Host: localhost:3306
+-- Generation Time: Aug 06, 2023 at 04:48 PM
+-- Server version: 10.3.39-MariaDB-cll-lve
+-- PHP Version: 7.4.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `codegleam`
+-- Database: `codeglea_blog`
 --
 
 -- --------------------------------------------------------
@@ -31,14 +32,15 @@ CREATE TABLE `admin` (
   `id` int(255) NOT NULL,
   `admin` varchar(255) NOT NULL,
   `password` mediumtext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `admin`
+-- admin 1234
 --
 
 INSERT INTO `admin` (`id`, `admin`, `password`) VALUES
-(1, 'joydeep', '$2y$10$7lozzF7VHV1v0d87iZB2GuGUO7kISJyNAD1jQhAXKsIYCecrQEG5S');
+(1, 'admin', '$2y$10$DTy0NrxMvy5CB3tg9j3eSuZSwkk1mUMwoJZzg9YI2SoFqTPLpbY7u');
 
 -- --------------------------------------------------------
 
@@ -55,7 +57,12 @@ CREATE TABLE `comments` (
   `parent_id` int(255) NOT NULL,
   `date` date NOT NULL DEFAULT current_timestamp(),
   `uid` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `comments`
+--
+
 
 -- --------------------------------------------------------
 
@@ -68,7 +75,12 @@ CREATE TABLE `files` (
   `name` mediumtext NOT NULL,
   `description` varchar(255) NOT NULL,
   `story_uid` mediumtext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `files`
+--
+
 
 -- --------------------------------------------------------
 
@@ -84,7 +96,8 @@ CREATE TABLE `posts` (
   `tags` varchar(255) NOT NULL,
   `date` datetime NOT NULL DEFAULT current_timestamp(),
   `pinned` int(10) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 -- --------------------------------------------------------
 
@@ -97,7 +110,12 @@ CREATE TABLE `stories` (
   `title` varchar(255) NOT NULL,
   `date` date NOT NULL DEFAULT current_timestamp(),
   `uid` mediumtext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `stories`
+--
+
 
 --
 -- Indexes for dumped tables
@@ -150,25 +168,25 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `files`
 --
 ALTER TABLE `files`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `stories`
 --
 ALTER TABLE `stories`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
